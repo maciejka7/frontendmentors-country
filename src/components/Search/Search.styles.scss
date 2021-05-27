@@ -1,0 +1,27 @@
+.search {
+  width: 480px;
+  padding: 10px;
+  margin-bottom: 45px;
+  background-color: var(--primary-color);
+  box-shadow: var(--main-shadow);
+  border-radius: 3px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--secondary-color);
+
+  &_field {
+    flex: 1;
+    padding: 10px 0;
+    margin-left: 20px;
+    font-weight: bold;
+    border: none;
+    outline: none;
+    background-color: var(--primary-color);
+    color: inherit;
+  }
+
+  &_icon {
+    margin-left: 10px;
+  }
+}

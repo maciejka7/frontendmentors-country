@@ -1,0 +1,12 @@
+section {
+  height: 80px;
+  margin-bottom: 45px;
+  background-color: var(--primary-color);
+  padding: 0 80px;
+  box-shadow: var(--main-shadow);
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  justify-content: space-between;
+}

@@ -1,0 +1,1 @@
+export type Filters = "World" | "Africa" | "America" | "Asia" | "Europe" | "Oceania";

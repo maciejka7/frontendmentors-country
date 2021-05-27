@@ -1,0 +1,46 @@
+.filters {
+  width: 200px;
+  padding: 16px;
+  margin-bottom: 45px;
+  margin-left: var(--site-padding);
+  background-color: var(--primary-color);
+  box-shadow: var(--main-shadow);
+  color: var(--secondary-color);
+  border-radius: 3px;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.options {
+  position: absolute;
+  width: 200px;
+  top: 60px;
+  left: 0;
+  background-color: var(--primary-color);
+  box-shadow: var(--main-shadow);
+  color: var(--secondary-color);
+  transition: all 0.5s ease-in-out;
+
+  &-item {
+    padding: 16px;
+    text-align: left;
+    font-weight: bold;
+    width: 100%;
+
+    &:hover {
+      background-color: var(--bg-color);
+    }
+  }
+}
+
+svg {
+  transition: transform 0.1s ease-in-out;
+}
+
+.isOpen {
+  transform: rotate(180deg);
+}

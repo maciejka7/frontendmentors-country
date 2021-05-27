@@ -1,0 +1,25 @@
+.card {
+  max-width: 265px;
+  border-radius: 3px;
+  background-color: var(--primary-color);
+  margin-bottom: 75px;
+  text-align: left;
+  box-shadow: var(--main-shadow);
+  cursor: pointer;
+}
+img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 35px 25px 50px 25px;
+}
+
+.card-content h3 {
+  margin-bottom: 20px;
+}
+.card-content p {
+  margin-bottom: 10px;
+}
