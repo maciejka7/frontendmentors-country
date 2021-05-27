@@ -25,10 +25,11 @@ import { Filters } from "../../types/filters";
 const filtersRegionOptions: Filters[] = [
   "World",
   "Africa",
-  "America",
+  "Americas",
   "Asia",
   "Europe",
   "Oceania",
+  "Polar",
 ];
 
 export default defineComponent({

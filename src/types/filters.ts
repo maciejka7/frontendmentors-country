@@ -1,1 +1,1 @@
-export type Filters = "World" | "Africa" | "America" | "Asia" | "Europe" | "Oceania";
+export type Filters = "World" | "Africa" | "Americas" | "Asia" | "Europe" | "Oceania" | "Polar";
