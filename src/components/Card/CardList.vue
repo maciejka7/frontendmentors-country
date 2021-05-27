@@ -1,18 +1,15 @@
 <template>
   <div class="card-list-container">
-    <!-- <transition-group name="list" tag="ul" v-if="allCountry"> -->
-    <!-- </transition-group> -->
-
     <div v-if="isLoading">Loading...</div>
 
     <div v-else>
-      <ul v-if="allCountry.length > 0">
+      <transition-group name="list" tag="ul" v-if="allCountry.length > 0">
         <li v-for="country in allCountry" :key="country.alpha3Code">
           <Card :info="country" />
         </li>
-      </ul>
+      </transition-group>
 
-      <div v-else-if="allCountry.length === 0">no matches 😶</div>
+      <div v-else>no matches 😶</div>
     </div>
   </div>
 </template>

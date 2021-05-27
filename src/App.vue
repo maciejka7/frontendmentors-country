@@ -1,19 +1,16 @@
 <template>
   <Header />
-  <section class="top-bar">
-    <Search />
-    <Filters />
-  </section>
-  <CardList />
+
+  <router-view></router-view>
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from "vue";
-import { CardList, Header, Search, Filters } from "./components";
+import { defineComponent } from "vue";
+import { Header } from "./components";
 
 export default defineComponent({
   name: "App",
-  components: { CardList, Header, Search, Filters },
+  components: { Header },
 });
 </script>
 
