@@ -27,8 +27,8 @@ export default defineComponent({
     const store = useStore();
 
     const handleSearch = debounce(() => {
-      console.log("dev", searchField);
       store.dispatch("searchForCountries", searchField.value);
+      store.dispatch("setSearchQuery", searchField.value);
     }, 500);
 
     watch(searchField, handleSearch);

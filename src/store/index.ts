@@ -8,7 +8,9 @@ import { mutations } from './mutations'
 export interface State {
     countries: Country[],
     allCountires:  Country[],
-    selectedRegion: Filters
+    selectedRegion: Filters,
+    filterQuery: string
+    isLoading: boolean
 }
 
 
@@ -18,12 +20,17 @@ export const store = createStore<State>({
         return {
             countries: [],
             selectedRegion: 'World',
-            allCountires: []
+            allCountires: [],
+            filterQuery: '',
+            isLoading: false,
         }
     },
     getters: {
         countires(state) {
             return state.countries
+        },
+        isLoading(state){
+            return state.isLoading
         },
     },
     actions,

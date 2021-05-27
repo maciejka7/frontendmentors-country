@@ -1,23 +1,25 @@
 import axios from 'axios'
-import { onMounted, ref } from 'vue';
+import { onMounted, } from 'vue';
 import { useStore } from 'vuex';
-import { SET_COUNTRIES } from '../store/mutations-types';
+
 import { Country } from '../types/country';
 
 export const useCountryApi = (endpoint?: string) => {
 
     const url = 'https://restcountries.eu/rest/v2/all';
-    let allCountry: Country[] = [];
-
+    
     const store = useStore();
+
+    store.dispatch('setIsLoading', true)
 
     onMounted(async () => {
       const data = await all();
       store.dispatch('setCountries', data)
+      store.dispatch('setIsLoading', false)
     });
 
     const all = async () => {
-        const response = await axios.get(url);
+        const response = await axios.get<Country[]>(url);
         const data = response.data;
         return data;
     }

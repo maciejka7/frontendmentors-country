@@ -1,5 +1,5 @@
 .filters {
-  width: 200px;
+  width: 210px;
   padding: 16px;
   margin-bottom: 45px;
   margin-left: var(--site-padding);
@@ -43,4 +43,8 @@ svg {
 
 .isOpen {
   transform: rotate(180deg);
+}
+
+p {
+  text-align: left;
 }
