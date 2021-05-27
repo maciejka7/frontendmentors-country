@@ -17,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, onUnmounted, ref } from "vue";
 import { useStore } from "vuex";
 import ChevronIcon from "../../assets/icons/chevron-down.svg";
 import { Filters } from "../../types/filters";
@@ -39,11 +39,23 @@ export default defineComponent({
     const store = useStore();
     const isOpen = ref<boolean>(false);
 
+    const handleCloseFiltersByKeyboard = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        isOpen.value = false;
+      }
+    };
+
+    document.addEventListener("keyup", handleCloseFiltersByKeyboard);
+
     const handleOpenOptions = () => (isOpen.value = !isOpen.value);
 
     const handleRegionFilterSelection = (region: string) => {
       store.dispatch("changeSelectedFilter", region);
     };
+
+    onUnmounted(() => {
+      document.removeEventListener("keyup", handleCloseFiltersByKeyboard);
+    });
 
     return {
       isOpen,

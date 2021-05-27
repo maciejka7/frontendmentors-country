@@ -2,3 +2,18 @@
   padding: 0 var(--site-padding);
   min-height: calc(100vh - calc(var(--site-padding) + 50px));
 }
+
+.list-move {
+  transition: transform 0.5s ease-in-out;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease-in-out;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(30px);
+}

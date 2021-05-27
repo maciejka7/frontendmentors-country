@@ -1,10 +1,10 @@
 <template>
   <div class="card-list-container">
-    <ul v-if="allCountry">
+    <transition-group name="list" tag="ul" v-if="allCountry">
       <li v-for="country in allCountry" :key="country.alpha3Code">
         <Card :info="country" />
       </li>
-    </ul>
+    </transition-group>
     <div v-else>Loading...</div>
   </div>
 </template>

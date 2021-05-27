@@ -1,7 +1,9 @@
 <template>
   <div class="search">
     <SearchIcon class="search_icon" />
+    <label for="search" v-show="false">Search</label>
     <input
+      autofocus
       class="search_field"
       type="text"
       name="search"
