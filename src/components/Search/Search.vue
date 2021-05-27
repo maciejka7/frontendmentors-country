@@ -9,18 +9,31 @@
       name="search"
       id="search"
       placeholder="Search for a country..."
+      v-model="searchField"
     />
   </div>
 </template>
 
 
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import SearchIcon from "../../assets/icons/search.svg";
+import debounce from "lodash/debounce";
+import { useStore } from "vuex";
 export default defineComponent({
   components: { SearchIcon },
   setup() {
-    return {};
+    const searchField = ref("");
+    const store = useStore();
+
+    const handleSearch = debounce(() => {
+      console.log("dev", searchField);
+      store.dispatch("searchForCountries", searchField.value);
+    }, 500);
+
+    watch(searchField, handleSearch);
+
+    return { handleSearch, searchField };
   },
 });
 </script>
