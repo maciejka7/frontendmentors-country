@@ -1,6 +1,12 @@
 <template>
   <div @click="handleOpenOptions" class="filters">
-    <p>Filter by Region</p>
+    <p>
+      {{
+        selectedRegion !== "World"
+          ? `Selected: ${selectedRegion}`
+          : "Filter by Region"
+      }}
+    </p>
     <ChevronIcon :class="{ isOpen: isOpen }" />
 
     <div class="options" v-show="isOpen">
@@ -38,6 +44,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     const isOpen = ref<boolean>(false);
+    const selectedRegion = ref<Filters>("World");
 
     const handleCloseFiltersByKeyboard = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -45,13 +52,14 @@ export default defineComponent({
       }
     };
 
-    document.addEventListener("keyup", handleCloseFiltersByKeyboard);
-
     const handleOpenOptions = () => (isOpen.value = !isOpen.value);
 
-    const handleRegionFilterSelection = (region: string) => {
+    const handleRegionFilterSelection = (region: Filters) => {
+      selectedRegion.value = region;
       store.dispatch("changeSelectedFilter", region);
     };
+
+    document.addEventListener("keyup", handleCloseFiltersByKeyboard);
 
     onUnmounted(() => {
       document.removeEventListener("keyup", handleCloseFiltersByKeyboard);
@@ -59,6 +67,7 @@ export default defineComponent({
 
     return {
       isOpen,
+      selectedRegion,
       handleOpenOptions,
       filtersRegionOptions,
       handleRegionFilterSelection,
