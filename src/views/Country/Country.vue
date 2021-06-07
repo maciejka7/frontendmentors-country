@@ -1,5 +1,6 @@
 <template>
   <div class="country">
+    <back-button />
     <h3>country</h3>
     <p>there will be a country details</p>
     {{ JSON.stringify(country) }}
@@ -10,9 +11,12 @@
 import { defineComponent, computed } from "@vue/runtime-core";
 import { useRoute } from "vue-router";
 import { useStore } from "vuex";
+import BackButton from "../../components/Buttons/BackButton.vue";
 
 export default defineComponent({
+  components: { BackButton },
   name: "Country",
+  components: { BackButton },
   setup() {
     const { params } = useRoute();
 

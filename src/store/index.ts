@@ -33,7 +33,8 @@ export const store = createStore<State>({
         countriesByCode: (state) => (code: string) => {
             const { push } = useRouter()
             const countryByCode = state.allCountires.filter(country => country.alpha3Code === code)
-            return countryByCode.length !== 0 ? countryByCode : push('/');
+            return countryByCode.length !== 0 ? countryByCode : null ;
+            // push('/')
         },
         isLoading(state){
             return state.isLoading
