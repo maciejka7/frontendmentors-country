@@ -5,7 +5,9 @@
     <div v-else>
       <transition-group name="list" tag="ul" v-if="allCountry.length > 0">
         <li v-for="country in allCountry" :key="country.alpha3Code">
-          <Card :info="country" />
+          <router-link :to="`/country/${country.alpha3Code}`">
+            <Card :info="country" />
+          </router-link>
         </li>
       </transition-group>
 
@@ -35,6 +37,6 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 @import "./CardList.styles.scss";
 </style>

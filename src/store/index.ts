@@ -1,4 +1,5 @@
 import { createLogger, createStore } from 'vuex'
+import { useRouter } from 'vue-router'
 import { Country } from '../types/country'
 import { Filters } from '../types/filters'
 
@@ -28,6 +29,11 @@ export const store = createStore<State>({
     getters: {
         countires(state) {
             return state.countries
+        },
+        countriesByCode: (state) => (code: string) => {
+            const { push } = useRouter()
+            const countryByCode = state.allCountires.filter(country => country.alpha3Code === code)
+            return countryByCode.length !== 0 ? countryByCode : push('/');
         },
         isLoading(state){
             return state.isLoading

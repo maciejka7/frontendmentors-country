@@ -29,6 +29,6 @@ export default defineComponent({
 });
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 @import "./Card.styles.scss";
 </style>

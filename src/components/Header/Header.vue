@@ -1,6 +1,8 @@
 <template>
   <section>
-    <h1>Where in the world?</h1>
+    <router-link to="/">
+      <h1>Where in the world?</h1>
+    </router-link>
     <theme-switcher />
   </section>
 </template>
@@ -13,6 +15,6 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped lang='scss'>
 @import "./Header.styles.scss";
 </style>

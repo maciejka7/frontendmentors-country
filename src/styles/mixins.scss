@@ -1,0 +1,9 @@
+@mixin resetAnchorStyle {
+  a {
+    color: var(--secondary-color);
+    text-decoration: none;
+    &:visited {
+      color: inherit;
+    }
+  }
+}

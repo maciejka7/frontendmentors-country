@@ -1,6 +1,8 @@
+@import "../../styles/mixins.scss";
 .card-list-container {
   padding: 0 var(--site-padding);
   min-height: calc(100vh - calc(var(--site-padding) + 50px));
+  @include resetAnchorStyle;
 }
 
 .list-move {
