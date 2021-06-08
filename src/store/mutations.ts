@@ -2,7 +2,7 @@ import { Mutation, MutationTree } from 'vuex'
 import { State } from '.'
 import { Country } from '../types/country';
 import { Filters } from '../types/filters';
-import { SEARCH_FOR_COUNTIRES, SET_COUNTRIES, SET_SEARCH_QUERY, SET_SELECTED_FILTERS, SET_IS_LOADING } from './mutations-types'
+import { SEARCH_FOR_COUNTIRES, SET_COUNTRIES, SET_SEARCH_QUERY, SET_SELECTED_FILTERS, SET_IS_LOADING, SET_SELECTED_COUNTRY } from './mutations-types'
 
 export const mutations:MutationTree<State> = {
     [SET_SELECTED_FILTERS]( state, region ) {
@@ -17,6 +17,9 @@ export const mutations:MutationTree<State> = {
     [SET_COUNTRIES](state, payload: Country[]) {
         state.countries = payload;
         state.allCountires = payload;
+    },
+    [SET_SELECTED_COUNTRY](state, payload: Country){
+        state.selectedCountry = payload;
     },
     [SET_SEARCH_QUERY](state, query: string){
         state.filterQuery = query;

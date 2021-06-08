@@ -7,30 +7,28 @@
   </div>
 </template>
 
-<script>
-import { defineComponent, computed } from "@vue/runtime-core";
-import { useRoute } from "vue-router";
+<script lang='ts'>
+import { defineComponent, computed, onMounted, ref } from "@vue/runtime-core";
+import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import BackButton from "../../components/Buttons/BackButton.vue";
+import { useCountryApi } from "../../hooks/useCountryApi";
+import { Country } from "../../types/country";
 
 export default defineComponent({
   components: { BackButton },
   name: "Country",
-  components: { BackButton },
   setup() {
     const { params } = useRoute();
-
     const store = useStore();
 
-    const country = computed(() =>
-      store.getters.countriesByCode(params.countryCode)
-    );
-
-    console.log(country);
+    useCountryApi(null, params.countryCode as string);
 
     return {
-      country,
+      country: computed(() => store.getters.selectedCountry),
     };
+
+    return {};
   },
 });
 </script>

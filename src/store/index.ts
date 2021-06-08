@@ -9,6 +9,7 @@ import { mutations } from './mutations'
 export interface State {
     countries: Country[],
     allCountires:  Country[],
+    selectedCountry: Country | null,
     selectedRegion: Filters,
     filterQuery: string
     isLoading: boolean
@@ -22,6 +23,7 @@ export const store = createStore<State>({
             countries: [],
             selectedRegion: 'World',
             allCountires: [],
+            selectedCountry: null,
             filterQuery: '',
             isLoading: false,
         }
@@ -35,6 +37,9 @@ export const store = createStore<State>({
             const countryByCode = state.allCountires.filter(country => country.alpha3Code === code)
             return countryByCode.length !== 0 ? countryByCode : null ;
             // push('/')
+        },
+        selectedCountry(state){
+            return state.selectedCountry
         },
         isLoading(state){
             return state.isLoading

@@ -5,9 +5,10 @@
     <div v-else>
       <transition-group name="list" tag="ul" v-if="allCountry.length > 0">
         <li v-for="country in allCountry" :key="country.alpha3Code">
-          <router-link :to="`/country/${country.alpha3Code}`">
-            <Card :info="country" />
-          </router-link>
+          <!-- :to="`/country/${country.alpha3Code}`" -->
+          <!-- <router-link @click="handleSelectCountry"> -->
+          <Card @click="() => handleSelectCountry(country)" :info="country" />
+          <!-- </router-link> -->
         </li>
       </transition-group>
 
@@ -16,22 +17,31 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent, computed } from "vue";
 import Card from "./Card.vue";
 import { useCountryApi } from "../../hooks/useCountryApi";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { Country } from "../../types/country";
 
 export default defineComponent({
   name: "CardList",
   components: { Card },
   setup() {
     const store = useStore();
+    const { push } = useRouter();
     useCountryApi();
+
+    const handleSelectCountry = (country: Country) => {
+      push(`/country/${country.alpha3Code}`);
+      store.dispatch("setSelectedCountry", country);
+    };
 
     return {
       allCountry: computed(() => store.getters.countires),
       isLoading: computed(() => store.getters.isLoading),
+      handleSelectCountry,
     };
   },
 });
