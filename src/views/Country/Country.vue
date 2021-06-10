@@ -1,22 +1,22 @@
 <template>
   <div class="country">
     <back-button />
-    <h3>country</h3>
-    <p>there will be a country details</p>
-    {{ JSON.stringify(country) }}
+    <template v-if="country">
+      <Details :country="country" />
+    </template>
   </div>
 </template>
 
 <script lang='ts'>
-import { defineComponent, computed, onMounted, ref } from "@vue/runtime-core";
-import { useRoute, useRouter } from "vue-router";
+import { defineComponent, computed } from "@vue/runtime-core";
+import { useRoute } from "vue-router";
 import { useStore } from "vuex";
 import BackButton from "../../components/Buttons/BackButton.vue";
+import Details from "../../components/Details/Details.vue";
 import { useCountryApi } from "../../hooks/useCountryApi";
-import { Country } from "../../types/country";
 
 export default defineComponent({
-  components: { BackButton },
+  components: { BackButton, Details },
   name: "Country",
   setup() {
     const { params } = useRoute();
@@ -27,8 +27,6 @@ export default defineComponent({
     return {
       country: computed(() => store.getters.selectedCountry),
     };
-
-    return {};
   },
 });
 </script>

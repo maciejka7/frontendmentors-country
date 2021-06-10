@@ -1,4 +1,4 @@
-type Currencies = {
+export type Currencies = {
     "code": string;
     "name": string;
     "symbol": string;
@@ -11,7 +11,7 @@ type Languages = {
     "nativeName": string;
 };
 
-type RegionalBlocs = {
+export type RegionalBlocs = {
     "acronym": string;
     "name": string;
     "otherAcronyms": string[];

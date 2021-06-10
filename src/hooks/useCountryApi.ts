@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { onMounted, } from 'vue';
 import { useStore } from 'vuex';
+import { State } from '../store';
 
 import { Country } from '../types/country';
 
@@ -16,12 +17,27 @@ export const useCountryApi:UseCountryAPI = (endpoint, code) : void => {
       byCountryCode: 'alpha/'
     }
     
-    const store = useStore();
+    const store = useStore<State>();
 
     store.dispatch('setIsLoading', true)
+    
 
     onMounted(async () => {
+        
+      if(store.state.allCountires.length === 0) {
+        
+        if(window.localStorage.getItem('allCountries')) {
+            const data = JSON.parse( window.localStorage.getItem('allCountries') as string );
+            store.dispatch('setCountries', data)
+        } else {
+          const data = await all();
+          store.dispatch('setCountries', data)
+          store.dispatch('setIsLoading', false)
 
+        }
+        
+      }
+        
       if(code && !store.getters.selectedCountry) {
         const data = await getCountryByCode(code);
         

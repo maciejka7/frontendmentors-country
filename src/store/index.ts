@@ -15,7 +15,6 @@ export interface State {
     isLoading: boolean
 }
 
-
 export const store = createStore<State>({
     strict: true,
     state() {
@@ -33,10 +32,8 @@ export const store = createStore<State>({
             return state.countries
         },
         countriesByCode: (state) => (code: string) => {
-            const { push } = useRouter()
             const countryByCode = state.allCountires.filter(country => country.alpha3Code === code)
             return countryByCode.length !== 0 ? countryByCode : null ;
-            // push('/')
         },
         selectedCountry(state){
             return state.selectedCountry
