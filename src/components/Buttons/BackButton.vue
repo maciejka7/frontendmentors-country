@@ -7,23 +7,18 @@
 
 <script>
 import { defineComponent } from "@vue/runtime-core";
-import { useRouter } from "vue-router";
 import ArrowLeft from "../../assets/icons/arrow-left.svg";
 
 export default defineComponent({
   name: "BackButton",
-  components: { ArrowLeft },
-  setup() {
-    const router = useRouter();
-
-    const handleBack = () => {
-      router.back();
-    };
-
-    return {
-      handleBack,
-    };
+  props: {
+    handleBack: {
+      type: Function,
+      required: true,
+    },
   },
+  components: { ArrowLeft },
+  setup() {},
 });
 </script>
 

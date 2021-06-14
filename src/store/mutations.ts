@@ -1,8 +1,8 @@
 import { Mutation, MutationTree } from 'vuex'
-import { State } from '.'
+import { NetworkError, State } from '.'
 import { Country } from '../types/country';
 import { Filters } from '../types/filters';
-import { SEARCH_FOR_COUNTIRES, SET_COUNTRIES, SET_SEARCH_QUERY, SET_SELECTED_FILTERS, SET_IS_LOADING, SET_SELECTED_COUNTRY } from './mutations-types'
+import { SEARCH_FOR_COUNTIRES, SET_COUNTRIES, SET_SEARCH_QUERY, SET_NETWORK_ERROR,  SET_SELECTED_FILTERS, SET_IS_LOADING, SET_SELECTED_COUNTRY } from './mutations-types'
 
 export const mutations:MutationTree<State> = {
     [SET_SELECTED_FILTERS]( state, region ) {
@@ -19,6 +19,7 @@ export const mutations:MutationTree<State> = {
         state.allCountires = payload;
     },
     [SET_SELECTED_COUNTRY](state, payload: Country){
+        console.log('SET_SELECTED_COUNTRY')
         state.selectedCountry = payload;
     },
     [SET_SEARCH_QUERY](state, query: string){
@@ -26,6 +27,19 @@ export const mutations:MutationTree<State> = {
     },
     [SET_IS_LOADING](state, isLoading: boolean) {
         state.isLoading = isLoading;
+    },
+    [SET_NETWORK_ERROR](state, error: NetworkError){
+
+        let networkErrorObj = error;
+
+        if(!error.msg) {
+            networkErrorObj = {
+                msg: 'Opps! Something went wrong. Please refresh page',
+                ...error,
+            }
+        }
+
+        state.networkError = networkErrorObj;
     },
     [SEARCH_FOR_COUNTIRES](state, query: Filters | ''){
         if(query === '') {

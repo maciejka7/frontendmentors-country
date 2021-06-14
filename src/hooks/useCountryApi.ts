@@ -6,9 +6,9 @@ import { State } from '../store';
 import { Country } from '../types/country';
 
 export type GetCountryByCode =  (code: string) => Promise<Country[]> 
-export type UseCountryAPI = (endpoint?: string | null, code?: string) => void
+export type UseCountryAPI = (code?: string) => void
 
-export const useCountryApi:UseCountryAPI = (endpoint, code) : void => {
+export const useCountryApi:UseCountryAPI = (code) : void => {
 
     const url = 'https://restcountries.eu/rest/v2/';
 
@@ -21,32 +21,34 @@ export const useCountryApi:UseCountryAPI = (endpoint, code) : void => {
 
     store.dispatch('setIsLoading', true)
     
+    const getCountry = async (code?: string) => {
+
+      if(code) {
+        const data = await getCountryByCode(code);  
+        store.dispatch('setSelectedCountry', data)
+        store.dispatch('setIsLoading', false)
+      } else {
+        const data = await all();
+        store.dispatch('setCountries', data)
+        store.dispatch('setIsLoading', false)
+      }
+    }
 
     onMounted(async () => {
         
       if(store.state.allCountires.length === 0) {
-        
         if(window.localStorage.getItem('allCountries')) {
             const data = JSON.parse( window.localStorage.getItem('allCountries') as string );
             store.dispatch('setCountries', data)
         } else {
-          const data = await all();
-          store.dispatch('setCountries', data)
-          store.dispatch('setIsLoading', false)
-
+            getCountry()
         }
-        
       }
         
       if(code && !store.getters.selectedCountry) {
-        const data = await getCountryByCode(code);
-        
-        store.dispatch('setSelectedCountry', data)
-        store.dispatch('setIsLoading', false)
+        getCountry(code)
       } else if (store.state.allCountires.length === 0) {
-        const data = await all();
-        store.dispatch('setCountries', data)
-        store.dispatch('setIsLoading', false)
+        getCountry()
       } else {
         store.dispatch('setIsLoading', false)
       }

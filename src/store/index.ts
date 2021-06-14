@@ -6,6 +6,11 @@ import { Filters } from '../types/filters'
 import { actions } from './actions'
 import { mutations } from './mutations'
 
+export type NetworkError = {
+    code?: string | number,
+    msg?: string
+}
+
 export interface State {
     countries: Country[],
     allCountires:  Country[],
@@ -13,6 +18,7 @@ export interface State {
     selectedRegion: Filters,
     filterQuery: string
     isLoading: boolean
+    networkError: NetworkError
 }
 
 export const store = createStore<State>({
@@ -25,6 +31,7 @@ export const store = createStore<State>({
             selectedCountry: null,
             filterQuery: '',
             isLoading: false,
+            networkError: {}
         }
     },
     getters: {
@@ -33,7 +40,7 @@ export const store = createStore<State>({
         },
         countriesByCode: (state) => (code: string) => {
             const countryByCode = state.allCountires.filter(country => country.alpha3Code === code)
-            return countryByCode.length !== 0 ? countryByCode : null ;
+            return countryByCode.length !== 0 ? countryByCode[0] : null ;
         },
         selectedCountry(state){
             return state.selectedCountry
@@ -45,6 +52,6 @@ export const store = createStore<State>({
     actions,
     mutations,
     plugins: [
-        createLogger()
+        // createLogger()
     ],
 })

@@ -16,7 +16,14 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, PropType, ref } from "@vue/runtime-core";
+import {
+  computed,
+  defineComponent,
+  onUpdated,
+  PropType,
+  ref,
+  watch,
+} from "@vue/runtime-core";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { State } from "../../store";
@@ -29,33 +36,33 @@ type BorderedCountries = {
 
 export default defineComponent({
   name: "BorderedCountries",
-  props: {
-    countries: {
-      type: Array as PropType<string[]>,
-    },
-  },
-  setup({ countries }) {
+  setup({}) {
     const store = useStore<State>();
     const borderedCountries = ref<BorderedCountries[]>([]);
+    const countries = computed(() => store.getters.selectedCountry);
     const { push } = useRouter();
 
     const handleMapAplhaCodeToFullName = () => {
       const countiresFullNameList: string[] = [];
+      const result: BorderedCountries[] = [];
 
       store.state.allCountires.forEach((country) => {
-        countries?.forEach((countryCode) => {
+        countries.value.borders?.forEach((countryCode: string) => {
           if (country.alpha3Code === countryCode) {
             countiresFullNameList.push(country.name);
-            borderedCountries.value.push({
+            result.push({
               alpha3Code: country.alpha3Code,
               name: country.name,
             });
           }
         });
       });
+      borderedCountries.value = result;
 
       return countiresFullNameList;
     };
+
+    watch(countries, () => handleMapAplhaCodeToFullName());
 
     const handleGetCountriesData = (countriesAlpha3Code: string) =>
       store.state.allCountires.filter(
@@ -71,6 +78,7 @@ export default defineComponent({
 
     handleMapAplhaCodeToFullName();
     return {
+      countries: computed(() => store.getters.selectedCountry),
       borderedCountries,
       handleSelectCountry,
     };

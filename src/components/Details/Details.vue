@@ -37,36 +37,31 @@
 </template>
 
 <script lang='ts'>
-import { computed, onMounted, onUpdated, ref, watch } from "@vue/runtime-core";
+import { computed, onUpdated, PropType } from "@vue/runtime-core";
 import { Country } from "../../types/country";
 import BorderedCountries from "../BorderedCountries/BorderedCountries.vue";
-import { useStore } from "vuex";
-import { State } from "../../store";
-import { useRoute, useRouter } from "vue-router";
 export default {
   components: { BorderedCountries },
+  props: {
+    country: {
+      type: Object as PropType<Country>,
+      required: true,
+    },
+  },
   setup() {
-    const store = useStore<State>();
-    const { afterEach } = useRouter();
-    const { params } = useRoute();
-
-    afterEach(() => {
-      console.log(
-        window.location.hash.substring(window.location.hash.length - 3)
-      );
-    });
-
     const factoryDisplayProperty = (
       array: any[],
       propertyName?: keyof Country
-    ) =>
-      !propertyName
-        ? array.join(", ")
-        : array.map((item) => item[propertyName]).join(", ");
+    ) => {
+      if (array && array?.length > 0) {
+        return !propertyName
+          ? array.join(", ")
+          : array.map((item) => item[propertyName]).join(", ");
+      }
+    };
 
     return {
       factoryDisplayProperty,
-      country: computed(() => store.getters.selectedCountry),
     };
   },
 };
