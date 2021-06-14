@@ -35,8 +35,6 @@ export default defineComponent({
 
     const handleSelectCountry = (country: Country) => {
       push(`/country/${country.alpha3Code}`);
-      console.log(country);
-
       store.dispatch("setSelectedCountry", country);
     };
 
