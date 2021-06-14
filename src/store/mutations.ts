@@ -19,7 +19,6 @@ export const mutations:MutationTree<State> = {
         state.allCountires = payload;
     },
     [SET_SELECTED_COUNTRY](state, payload: Country){
-        console.log('SET_SELECTED_COUNTRY')
         state.selectedCountry = payload;
     },
     [SET_SEARCH_QUERY](state, query: string){

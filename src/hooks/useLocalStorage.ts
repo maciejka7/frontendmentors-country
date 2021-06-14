@@ -21,8 +21,7 @@ export const useLocalStorage = (key: string, ref: Ref) => {
         return item ? ref.value = JSON.parse(item) : ref.value = initialTodos;
     })
     
-    watch(ref, () => {
-        console.log('watch');            
+    watch(ref, () => {      
         localStorage.setItem(key, JSON.stringify(ref.value))
     })
 
