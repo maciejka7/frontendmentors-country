@@ -23,7 +23,7 @@ import {
   PropType,
   ref,
   watch,
-} from "@vue/runtime-core";
+} from "vue";
 import { useRouter } from "vue-router";
 import { useStore } from "vuex";
 import { State } from "../../store";
@@ -69,7 +69,7 @@ export default defineComponent({
         (country) => country.alpha3Code === countriesAlpha3Code
       );
 
-    const handleSelectCountry = (country: Country) => {
+    const handleSelectCountry = (country: Pick<Country, "alpha3Code" | "name">) => {
       const [countryData] = handleGetCountriesData(country.alpha3Code);
 
       store.dispatch("setSelectedCountry", countryData);

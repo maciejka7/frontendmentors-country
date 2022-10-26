@@ -7,7 +7,7 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import ThemeSwitcher from "../ThemeSwitcher/ThemeSwitcher.vue";
 export default {
   name: "Header",

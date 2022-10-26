@@ -15,10 +15,10 @@
 </template>
 
 
-<script>
+<script lang="ts">
 import { defineComponent, ref, watch } from "vue";
 import SearchIcon from "../../assets/icons/search.svg";
-import debounce from "lodash/debounce";
+import debounce from "lodash";
 import { useStore } from "vuex";
 export default defineComponent({
   components: { SearchIcon },
@@ -29,9 +29,9 @@ export default defineComponent({
     const handleSearch = debounce(() => {
       store.dispatch("searchForCountries", searchField.value);
       store.dispatch("setSearchQuery", searchField.value);
-    }, 500);
+    } );
 
-    watch(searchField, handleSearch);
+    watch(searchField, handleSearch as any);
 
     return { handleSearch, searchField };
   },

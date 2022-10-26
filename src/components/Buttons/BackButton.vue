@@ -1,19 +1,19 @@
 <template>
   <div @click="handleBack" class="back-button" role="button">
-    <ArrowLeft />
+    <arrow-left />
     <p>Back</p>
   </div>
 </template>
 
-<script>
-import { defineComponent } from "@vue/runtime-core";
+<script lang="ts">
+import { defineComponent, PropType } from "vue";
 import ArrowLeft from "../../assets/icons/arrow-left.svg";
 
 export default defineComponent({
   name: "BackButton",
   props: {
     handleBack: {
-      type: Function,
+      type: Function as PropType<(event:MouseEvent)=> void>,
       required: true,
     },
   },

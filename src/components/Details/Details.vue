@@ -37,7 +37,7 @@
 </template>
 
 <script lang='ts'>
-import { computed, onUpdated, PropType } from "@vue/runtime-core";
+import { computed, onUpdated, PropType } from "vue";
 import { Country } from "../../types/country";
 import BorderedCountries from "../BorderedCountries/BorderedCountries.vue";
 export default {

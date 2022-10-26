@@ -8,7 +8,7 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent, computed } from "@vue/runtime-core";
+import { defineComponent, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useStore } from "vuex";
 import BackButton from "../../components/Buttons/BackButton.vue";
@@ -27,7 +27,7 @@ export default defineComponent({
 
     useCountryApi(params.countryCode as string);
 
-    const handleBack = () => {
+    const handleBack = (event: MouseEvent) => {
       if (params?.countryCode) {
         const country: Country = store.getters.countriesByCode(
           params?.countryCode
