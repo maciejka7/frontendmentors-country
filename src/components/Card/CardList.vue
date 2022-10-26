@@ -1,7 +1,7 @@
 <template>
   <div class="card-list-container">
     <div v-if="isLoading">Loading...</div>
-
+    <div v-else-if="isError"> {{isError.msg}} </div>
     <div v-else>
       <transition-group name="list" tag="ul" v-if="allCountry.length > 0">
         <li v-for="country in allCountry" :key="country.alpha3Code">
@@ -24,12 +24,13 @@ import { useCountryApi } from "../../hooks/useCountryApi";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { Country } from "../../types/country";
+import { State } from "../../store";
 
 export default defineComponent({
   name: "CardList",
   components: { Card },
   setup() {
-    const store = useStore();
+    const store = useStore<State>();
     const { push } = useRouter();
     useCountryApi();
 
@@ -41,6 +42,7 @@ export default defineComponent({
     return {
       allCountry: computed(() => store.getters.countires),
       isLoading: computed(() => store.getters.isLoading),
+      isError: computed(() => store.getters.networkError),
       handleSelectCountry,
     };
   },

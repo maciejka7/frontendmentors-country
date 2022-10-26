@@ -30,7 +30,8 @@ export const mutations:MutationTree<State> = {
     [SET_NETWORK_ERROR](state, error: NetworkError){
 
         let networkErrorObj = error;
-
+        console.log('eeeeeeeeeee');
+        
         if(!error.msg) {
             networkErrorObj = {
                 msg: 'Opps! Something went wrong. Please refresh page',

@@ -48,6 +48,9 @@ export const store = createStore<State>({
         isLoading(state){
             return state.isLoading
         },
+        isError(state) {
+            return state.networkError
+        }
     },
     actions,
     mutations,
